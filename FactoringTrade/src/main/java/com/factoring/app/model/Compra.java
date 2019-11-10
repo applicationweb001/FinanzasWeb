@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -19,10 +21,11 @@ public class Compra {
 	@Column(name = "compra_id")
 	private Long id;
 	
-	@Column(name = "Recibo")
-	private Recibo recibo;
 
-	@NotEmpty(message = "Por favor ingrese la fecha de descuento de la compra.")
+	@ManyToOne
+	@JoinColumn(name = "FK_categoria")	
+	private Recibo recibo;
+	
 	@Column(name = "F_Descuento")
 	private Date fechaDescuento;
 

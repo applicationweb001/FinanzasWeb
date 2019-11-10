@@ -9,7 +9,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.factoring.app.model.Compra;
-import com.geek.model.Category;
 
 public interface CompraRepository extends PagingAndSortingRepository<Compra, Long>{
 
@@ -35,8 +34,8 @@ public interface CompraRepository extends PagingAndSortingRepository<Compra, Lon
      */
     
 
-    @Query("SELECT a FROM Category a WHERE a.name=:name")
-    List<Compra> findByCompraId(@Param("id") Long id);
+    //@Query("SELECT a FROM Category a WHERE a.name=:name")
+    //List<Compra> findByCompraId(@Param("id") Long id);
     
     
     Page<Compra> findAll(Pageable pageable);

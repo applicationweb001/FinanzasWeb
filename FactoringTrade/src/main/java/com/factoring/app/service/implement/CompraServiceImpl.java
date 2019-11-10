@@ -19,6 +19,7 @@ import com.factoring.app.service.CompraService;
 
 @Service
 public class CompraServiceImpl implements CompraService{
+	
 	@Autowired
 	private CompraRepository compraRepository;
 	
@@ -82,13 +83,19 @@ public class CompraServiceImpl implements CompraService{
 	public Page<Compra> findAll(Pageable pageable) {
 		return compraRepository.findAll(pageable);
 	}
-	
+
 	@Override
 	public boolean CompraValid(Compra compra) {
-		List<Compra> compras= new ArrayList<>();
-		compraRepository.findByCompraId(compra.getId()).iterator().forEachRemaining(compras::add);
-        if (!compras.isEmpty()) { return false;}
-        else {return true;}
+		// TODO Auto-generated method stub
+		return false;
 	}
+	
+	//@Override
+	//public boolean CompraValid(Compra compra) {
+		//List<Compra> compras= new ArrayList<>();
+		//compraRepository.findByCompraId(compra.getId()).iterator().forEachRemaining(compras::add);
+        //if (!compras.isEmpty()) { return false;}
+        //else {return true;}
+	//}
 
 }
