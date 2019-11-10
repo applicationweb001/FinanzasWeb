@@ -19,8 +19,8 @@ public class Compra {
 	@Column(name = "compra_id")
 	private Long id;
 	
-	@Column(name = "FK_Recibo")
-	private Recibo recibo;
+	//@Column(name = "FK_Recibo")
+	//private Recibo recibo;
 
 	@NotEmpty(message = "Por favor ingrese la fecha de descuento de la compra.")
 	@Column(name = "F_Descuento")
@@ -45,7 +45,7 @@ public class Compra {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/*
 	public Recibo getRecibo() {
 		return recibo;
 	}
@@ -53,7 +53,7 @@ public class Compra {
 	public void setRecibo(Recibo recibo) {
 		this.recibo = recibo;
 	}
-
+*/
 	public Date getFechaDescuento() {
 		return fechaDescuento;
 	}
