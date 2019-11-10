@@ -1,6 +1,10 @@
 package com.factoring.app.service.implement;
+import com.factoring.app.exception.ResourceNotFoundException;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,43 +24,71 @@ public class CompraServiceImpl implements CompraService{
 	
 	@Override
 	public List<Compra> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Compra> compras = new ArrayList<>();
+		compraRepository.findAll().iterator().forEachRemaining(compras::add);
+		return compras;
 	}
 
 	@Override
 	public Compra create(Compra object) {
-		// TODO Auto-generated method stub
-		return null;
+		Compra newcompra;
+		newcompra = compraRepository.save(object);
+		return newcompra;
 	}
 
 	@Override
 	public Compra update(Long id, Compra objectupdate) {
-		// TODO Auto-generated method stub
-		return null;
+		Compra compra = findById(id);
+		
+		compra.setFechaDescuento(objectupdate.getFechaDescuento());
+		compra.setTep(objectupdate.getTep());
+		compra.setPeriodo(objectupdate.getPeriodo());
+		compra.setTipoMoneda(objectupdate.getTipoMoneda());
+		compraRepository.save(compra);	
+		return compra;
+		
 	}
 
 	@Override
 	public void delete(Long objectId) {
-		// TODO Auto-generated method stub
+		compraRepository.delete(findById(objectId));
 		
 	}
 
 	@Override
 	public Compra findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Compra> compra = compraRepository.findById(id);
+
+		if (!compra.isPresent()) {
+           throw new ResourceNotFoundException("There is no Compra with ID = " + id);
+        }
+
+		return compra.get();
 	}
 
 	@Override
 	public Compra getLatestEntry() {
-		// TODO Auto-generated method stub
-		return null;
+		 List<Compra> compra = getAll();
+	        if(compra.isEmpty()){
+	            return null;
+	        }
+	        else{
+	            Long latestcompraID = compraRepository.findTopByOrderByIdDesc();
+	            return findById(latestcompraID);
+	        }
 	}
 
 	@Override
 	public Page<Compra> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return compraRepository.findAll(pageable);
 	}
+	
+	@Override
+	public boolean CompraValid(Compra compra) {
+		List<Compra> compras= new ArrayList<>();
+		compraRepository.findByCompraId(compra.getId()).iterator().forEachRemaining(compras::add);
+        if (!compras.isEmpty()) { return false;}
+        else {return true;}
+	}
+
 }

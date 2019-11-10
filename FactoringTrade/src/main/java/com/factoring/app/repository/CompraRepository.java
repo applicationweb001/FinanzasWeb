@@ -1,11 +1,15 @@
 package com.factoring.app.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.factoring.app.model.Compra;
+import com.geek.model.Category;
 
 public interface CompraRepository extends PagingAndSortingRepository<Compra, Long>{
 
@@ -29,5 +33,11 @@ public interface CompraRepository extends PagingAndSortingRepository<Compra, Lon
      * @return          a page of entities that fulfill the restrictions
      *                  specified by the Pageable object
      */
+    
+
+    @Query("SELECT a FROM Category a WHERE a.name=:name")
+    List<Compra> findByCompraId(@Param("id") Long id);
+    
+    
     Page<Compra> findAll(Pageable pageable);
 }
