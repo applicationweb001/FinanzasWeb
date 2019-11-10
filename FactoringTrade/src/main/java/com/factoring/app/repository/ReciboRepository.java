@@ -27,9 +27,8 @@ public interface ReciboRepository extends PagingAndSortingRepository<Recibo, Lon
      * @return          List of articles with the same title and author
      */
     //Buscar los recibos de un usuario
-    @Query("SELECT r FROM Recibo r WHERE r.FK_usuario=:user")
-    List<Article> findByTitleAndAuthor(@Param("user") Long id);
-
+    //@Query("SELECT r FROM Recibo r WHERE r.FK_usuario=:user")
+    //List<Recibo> findByReciboId(@Param("user") Long id);
 
 	/**
      * @param pageable
