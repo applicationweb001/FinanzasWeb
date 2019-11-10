@@ -1,24 +1,18 @@
 package com.factoring.app.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-import com.factoring.app.model.Article;
-import com.factoring.app.model.Recibo;
+import com.factoring.app.model.Compra;
 
-@Repository
-public interface ReciboRepository extends PagingAndSortingRepository<Recibo, Long>{
+public interface CompraRepository extends PagingAndSortingRepository<Compra, Long>{
 
 	/**
      * @return newest articleId
      */
-    @Query(value = "SELECT MAX(id) FROM Recibo")
+    @Query(value = "SELECT MAX(id) FROM Compra")
     Long findTopByOrderByIdDesc();
 
     /**
@@ -35,7 +29,5 @@ public interface ReciboRepository extends PagingAndSortingRepository<Recibo, Lon
      * @return          a page of entities that fulfill the restrictions
      *                  specified by the Pageable object
      */
-    Page<Recibo> findAll(Pageable pageable);
-	
-	
+    Page<Compra> findAll(Pageable pageable);
 }
