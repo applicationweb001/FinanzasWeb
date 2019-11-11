@@ -14,7 +14,7 @@
 				<div class="row">
 					<div class="col-md-8 offset-md-2 col-sm-12">
 						<div class="title">
-							<h2>Nuevo Usuario</h2>
+							<h2>Nuevo Recibo de Honorario</h2>
 						</div>
 
 						<form th:object="${recibo}" th:action="@{/recibos/create}"
@@ -29,13 +29,44 @@
 
 
 							<div class="form-group">
-								<label for="fechaEmision"> Fecha Emision </label> 
-								<input th:field="*{fechaEmision}" class="form-control validate"
-									type="date" id="fechaEmision"> 
-									<span class="text-danger errorMsg"
+								<label for="fechaEmision"> Fecha Emision </label> <input
+									th:field="*{fechaEmision}" class="form-control validate"
+									value="*{fechaEmision}"
+									type="date" id="fechaEmision"> <span
+									class="text-danger errorMsg"
 									th:if="${#fields.hasErrors('fechaEmision')}"
 									th:errors="*{fechaEmision}"></span>
 							</div>
+
+							<div class="form-group">
+								<label for="fechaPago"> Fecha Pago </label> <input
+									th:field="*{fechaPago}" class="form-control validate"
+									type="date" id="fechaPago"> <span
+									class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('fechaPago')}"
+									th:errors="*{fechaPago}"></span>
+							</div>
+
+							<div class="form-group">
+								<label for="totalPago">Total Pago</label> <input
+									th:field="*{totalPago}" id="totalPago" type="text"
+									class="form-control validate"> <span
+									class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('totalPago')}"
+									th:errors="*{totalPago}"></span>
+							</div>
+
+							<div class="form-group">
+								<label for="retencion">Retenciones </label> <input
+									th:field="*{retencion}" id="retencion" type="text"
+									class="form-control validate"> <span
+									class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('retencion')}"
+									th:errors="*{retencion}"></span>
+							</div>
+
+
+
 
 							<button type="submit" class="btn btn-dark">Save</button>
 							<a class="btn btn-primary" th:href="@{'/recibos'}">Cancel</a>

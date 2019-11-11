@@ -39,7 +39,7 @@ public class ReciboController {
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	@GetMapping("/{id}")
 	public String getReciboById(@PathVariable(value = "id") Long reciboId, Model model) {
-		model.addAttribute("article", reciboService.findById(reciboId));
+		model.addAttribute("recibo", reciboService.findById(reciboId));
 		return RECIBO_VIEW;
 	}
 	

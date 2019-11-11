@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.factoring.app.dateAudit.DateAudit;
 
 @Entity
@@ -31,12 +33,12 @@ public class Recibo extends DateAudit {
 	@JoinColumn(name = "banco_id")
 	private Banco banco;
 		
-	@NotEmpty(message = "Por favor ingrese la fecha de emisión del recibo.")
 	@Column(name = "F_Emision")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date fechaEmision;
 
-	@NotEmpty(message = "Por favor ingrese la fecha de pago del recibo.")
-	@Column(name = "F_Pago")	
+	@Column(name = "F_Pago")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date fechaPago;
 
 	@NotEmpty(message = "Por favor ingrese el monto total del Total de pago.")
@@ -56,8 +58,8 @@ public class Recibo extends DateAudit {
     }
 	
 	public Recibo(Long id, Account cuenta, Banco banco,
-			@NotEmpty(message = "Por favor ingrese la fecha de emisión del recibo.") Date fechaEmision,
-			@NotEmpty(message = "Por favor ingrese la fecha de pago del recibo.") Date fechaPago,
+			 Date fechaEmision,
+			 Date fechaPago,
 			@NotEmpty(message = "Por favor ingrese el monto total del Total de pago.") String totalPago,
 			String valorActual, String retencion) {
 		super();
