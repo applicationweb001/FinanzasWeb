@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.factoring.app.model.Article;
+import com.factoring.app.model.Banco;
 import com.factoring.app.model.Usuario;
 import com.factoring.app.service.ArticleService;
+import com.factoring.app.service.BancoService;
 import com.factoring.app.service.UsuarioService;
 
 @Component
@@ -20,6 +22,9 @@ public class PageInitPagination {
 	private ArticleService articleService;
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private BancoService bancoService;
 
 	// pagination
 	private static final int BUTTONS_TO_SHOW = 3;
@@ -65,6 +70,26 @@ public class PageInitPagination {
 		initModelView.addObject("pager", pager);
 		return initModelView;
 	}
+	public  ModelAndView initPaginationBanco(Optional<Integer> pageSize, Optional<Integer> page, String url) {
+		ModelAndView initModelView = new ModelAndView(url);
+		// If pageSize == null, return initial page size
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		/*
+		 * If page == null || page < 0 (to prevent exception), return initial size Else,
+		 * return value of param. decreased by 1
+		 */
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<Banco> bancosList = bancoService.findAll(PageRequest.of(evalPage, evalPageSize));
+		PagerModel pager = new PagerModel(bancosList.getTotalPages(), bancosList.getNumber(), BUTTONS_TO_SHOW);
+
+		initModelView.addObject("bancosList", bancosList);
+		initModelView.addObject("selectedPageSize", evalPageSize);
+		initModelView.addObject("pageSizes", PAGE_SIZES);
+		initModelView.addObject("pager", pager);
+		return initModelView;
+	}
+
 
 
 }

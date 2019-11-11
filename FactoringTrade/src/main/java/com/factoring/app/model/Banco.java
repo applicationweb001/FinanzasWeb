@@ -1,4 +1,5 @@
 package com.factoring.app.model;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,34 +12,45 @@ import javax.validation.constraints.NotEmpty;
 
 import com.factoring.app.dateAudit.DateAudit;
 
+
 @Entity
-@Table(name="bancos")
+@Table(name = "Bancos")
 public class Banco extends DateAudit{
 	
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "banco_id")
 	private Long id;
 	
+	public Banco() {
+		this.setCreatedAt(new Date());
+		this.setUpdatedAt(new Date());
+	}
+
+	public Banco(Long id, @NotEmpty(message = "Por favor ingrese el nombre del banco.") String nombre, double tasa,
+			@NotEmpty(message = "Por favor ingrese el tipo de tasa.") String tipoTasa) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.tasa = tasa;
+		this.tipoTasa = tipoTasa;
+	}
+
 	@NotEmpty(message = "Por favor ingrese el nombre del banco.")
-	@Column(name = "nombre")
+	@Column(name = "Nombre")
 	private String nombre;
 
-	@NotEmpty(message = "Por favor ingrese la tasa del banco.")
-	@Column(name = "tasa")	
+	
+	@Column(name = "Tasa")	
 	private double tasa;
 	
 	@NotEmpty(message = "Por favor ingrese el tipo de tasa.")
-	@Column(name = "tipo_de_tasa")	
-	private double tipoTasa;
+	@Column(name = "Tipo_de_Tasa")	
+	private String tipoTasa;
 
-	public Banco() {
-    	this.setCreatedAt(new Date());
-        this.setUpdatedAt(new Date());
-    }
-	
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -63,11 +75,11 @@ public class Banco extends DateAudit{
 		this.tasa = tasa;
 	}
 
-	public double getTipoTasa() {
+	public String getTipoTasa() {
 		return tipoTasa;
 	}
 
-	public void setTipoTasa(double tipoTasa) {
+	public void setTipoTasa(String tipoTasa) {
 		this.tipoTasa = tipoTasa;
 	}
 	
