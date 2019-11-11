@@ -86,6 +86,8 @@ public class ArticleController {
 
 		return "redirect:/articles/" + newArticle.getArticleId();
 	}
+	
+	
 
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping("{id}/edit")

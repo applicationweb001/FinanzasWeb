@@ -2,20 +2,24 @@ package com.factoring.app.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-public class Banco {
-	
+import com.factoring.app.dateAudit.DateAudit;
 
+@Entity
+@Table(name="bancos")
+public class Banco extends DateAudit{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "recibo_id")
+	@Column(name = "banco_id")
 	private Long id;
 	
-
 	@NotEmpty(message = "Por favor ingrese el nombre del banco.")
 	@Column(name = "nombre")
 	private String nombre;
@@ -28,6 +32,13 @@ public class Banco {
 	@Column(name = "tipo_de_tasa")	
 	private double tipoTasa;
 
+	public Banco() {
+    	this.setCreatedAt(new Date());
+        this.setUpdatedAt(new Date());
+    }
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

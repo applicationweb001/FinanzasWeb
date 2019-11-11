@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>Nuevo Usuario</h2>
+						</div>
+
+						<form th:object="${recibo}" th:action="@{/recibos/create}"
+							th:method="post">
+
+							<div class="alert alert-danger" th:if="${error!=null}"
+								th:text="${error}"></div>
+
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+							</div>
+
+
+							<div class="form-group">
+								<label for="fechaEmision"> Fecha Emision </label> 
+								<input th:field="*{fechaEmision}" class="form-control validate"
+									type="date" id="fechaEmision"> 
+									<span class="text-danger errorMsg"
+									th:if="${#fields.hasErrors('fechaEmision')}"
+									th:errors="*{fechaEmision}"></span>
+							</div>
+
+							<button type="submit" class="btn btn-dark">Save</button>
+							<a class="btn btn-primary" th:href="@{'/recibos'}">Cancel</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		var now = new Date();
+
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+		var today = now.getFullYear() + "/" + (month) + "/" + (day);
+		$("#fechaEmision").val(today);
+	});
+</script>
+
+</html>

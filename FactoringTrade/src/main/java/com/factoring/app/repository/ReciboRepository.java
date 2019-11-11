@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.factoring.app.model.Recibo;
@@ -25,8 +26,8 @@ public interface ReciboRepository extends PagingAndSortingRepository<Recibo, Lon
      * @return          List of articles with the same title and author
      */
     //Buscar los recibos de un usuario
-    //@Query("SELECT r FROM Recibo r WHERE r.FK_usuario=:user")
-    //List<Recibo> findByReciboId(@Param("user") Long id);
+    @Query("SELECT r FROM Recibo r WHERE r.cuenta=:user")
+    List<Recibo> findByReciboId(@Param("user") Long id);
 
 	/**
      * @param pageable
@@ -34,6 +35,5 @@ public interface ReciboRepository extends PagingAndSortingRepository<Recibo, Lon
      *                  specified by the Pageable object
      */
     Page<Recibo> findAll(Pageable pageable);
-	
-	
+		
 }
