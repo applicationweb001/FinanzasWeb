@@ -19,9 +19,9 @@ public class Recibo {
 	@Column(name = "recibo_id")
 	private Long id;
 	
-	//@Column(name = "FK_usuario")
-	// private Usuario usuario;
-
+	@Column(name = "FK_usuario")
+	private Account usuario;
+	
 	@NotEmpty(message = "Por favor ingrese la fecha de emisión del recibo.")
 	@Column(name = "F_Emision")
 	private Date fechaEmision;

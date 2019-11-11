@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.factoring.app.common.PageInitPagination;
-import com.factoring.app.model.Article;
 import com.factoring.app.model.Usuario;
 import com.factoring.app.service.UsuarioService;
 
@@ -62,7 +61,11 @@ public class UsuarioController {
 
 		// in case of redirection model will contain article
 		if (!model.containsAttribute("usuario")) {
+			
 			model.addAttribute("usuario", new Usuario());
+			
+			model.addAttribute("usuario.RUC", 6);
+			
 		}
 		return USUARIO_ADD_FORM_VIEW;
 	}
@@ -71,6 +74,7 @@ public class UsuarioController {
 	@PostMapping("/create")
 	public String createUsuario(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes attr) {
 
+		
 		if (result.hasErrors() ) {
 
 			// After the redirect: flash attributes pass attributes to the model
